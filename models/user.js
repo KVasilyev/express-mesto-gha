@@ -17,6 +17,7 @@ const userScheme = new mongoose.Schema({
   },
   avatar: {
     type: String,
+    required: true,
     default: 'https://upload.wikimedia.org/wikipedia/commons/4/42/Unknowcvcvc.jpg',
   },
 })

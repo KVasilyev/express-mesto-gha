@@ -68,7 +68,7 @@ module.exports.putLikeToCard = (req, res) => {
   .orFail()
   .then((card) => {
     res.status(200).send({
-      data: card,
+      data: card
     })
   })
   .catch((err) => {
@@ -95,7 +95,7 @@ module.exports.removeLikeFromCard = (req, res) => {
   .orFail()
   .then((card) => {
     res.status(200).send({
-      data: card,
+      data: card
     })
   })
   .catch((err) => {

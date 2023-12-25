@@ -3,14 +3,20 @@ const mongoose = require('mongoose');
 const userScheme = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: {
+      value: true,
+      message: 'Обязательное поле',
+    },
     default: 'Жак-Ив',
     minlength: 2,
     maxlength: 30,
   },
   about: {
     type: String,
-    required: true,
+    required: {
+      value: true,
+      message: 'Обязательное поле',
+    },
     default: 'Исследователь',
     minlength: 2,
     maxlength: 30,

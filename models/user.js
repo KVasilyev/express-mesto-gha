@@ -25,7 +25,7 @@ const userScheme = new mongoose.Schema({
       value: true,
       message: 'Обязательное поле',
     },
-  },
-})
+  }
+}, { versionKey: false })
 
 module.exports = mongoose.model('user', userScheme);

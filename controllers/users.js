@@ -29,14 +29,17 @@ module.exports.getUserById = (req, res) => {
       res.status(400).send({
         message: `Передан некорректный ID`,
       })
+      return;
     } else if (err.message === 'CastError') {
       res.status(404).send({
         message: `Пользователь с таким ID не найден`,
       })
+      return;
     } else {
       res.status(500).send({
         message: `Произошла ошибка. Подробнее: ${err.message}`,
       })
+      return;
     }
   })
 }

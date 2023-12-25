@@ -25,7 +25,7 @@ module.exports.addCard = (req, res) => {
     })
   })
   .catch((err) => {
-    if(err.message === 'ValidationError') {
+    if(err.name === 'ValidationError') {
       res.status(400).send({
         message: `Невалидные данные при создании карточки`,
       })
@@ -45,11 +45,11 @@ module.exports.deleteCard = (req, res) => {
     res.send({ data: card })
   })
   .catch((err) => {
-    if(err.message === 'CastError') {
+    if(err.name === 'CastError') {
       res.status(400).send({
         message: `Некорректный ID для удаления карточки`,
       })
-    } else if(err.message === 'DocumentNotFoundError') {
+    } else if(err.name === 'DocumentNotFoundError') {
       res.status(404).send({
         message: `Карточка с таким ID не найдена`,
       })

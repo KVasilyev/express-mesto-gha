@@ -5,14 +5,13 @@ const {
   addCard,
   deleteCard,
   putLikeToCard,
-  removeLikeFromCard
+  removeLikeFromCard,
 } = require('../controllers/cards');
 
 router.get('/', getCardsList);
 router.post('/', addCard);
 router.delete('/:cardId', deleteCard);
 router.put('/:cardId/likes', putLikeToCard);
-router.delete('/:cardId/likes', removeLikeFromCard)
-
+router.delete('/:cardId/likes', removeLikeFromCard);
 
 module.exports = router;

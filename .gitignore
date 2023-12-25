@@ -2,6 +2,7 @@
 logs
 *.log
 npm-debug.log*
+old-eslintrc
 
 # Dependency directory
 node_modules

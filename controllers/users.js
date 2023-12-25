@@ -71,7 +71,7 @@ module.exports.updateUser = (req, res) => {
   .orFail()
   .then((user) => {
     res.status(200).send({
-      data: user,
+      data: user
     })
   })
   .catch((err) => {
@@ -99,7 +99,7 @@ module.exports.updateUserAvatar = (req, res) => {
   .orFail()
   .then((user) => {
     res.status(200).send({
-      data: user,
+      data: user
     })
   })
   .catch((err) => {

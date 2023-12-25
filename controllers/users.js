@@ -65,7 +65,7 @@ module.exports.addUser = (req, res) => {
 
 // Обновление профиля
 module.exports.updateUser = (req, res) => {
-  const owner = req.userId;
+  const owner = req.user._id;
   const { name, about } = req.body;
   User.findByIdAndUpdate(owner, { name, about }, { new: true, runValidators: true })
   .orFail()
@@ -93,7 +93,7 @@ module.exports.updateUser = (req, res) => {
 
 // Обновление аватара
 module.exports.updateUserAvatar = (req, res) => {
-  const owner = req.userId;
+  const owner = req.user._id;
   const { avatar } = req.body;
   User.findByIdAndUpdate(owner, { avatar }, { new: true, runValidators: true, select: { avatar } })
   .orFail()

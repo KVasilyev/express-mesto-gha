@@ -2,10 +2,10 @@ const Card = require('../models/card');
 
 // Все карточки
 module.exports.getCardsList = (req, res) => {
-  Card.find({}, { name: 1, link: 1, owner: 1, likes: 1, createdAt: 1 })
+  Card.find({})
   .ther((card) => {
     res.status(200).send({
-      data: card,
+      data: card
     })
   })
   .catch((err) => {

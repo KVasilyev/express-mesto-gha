@@ -3,7 +3,7 @@ const Card = require('../models/card');
 // Все карточки
 module.exports.getCardsList = (req, res) => {
   Card.find({})
-  .ther((card) => {
+  .then((card) => {
     res.status(200).send({
       data: card
     })

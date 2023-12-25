@@ -58,10 +58,12 @@ module.exports.addUser = (req, res) => {
       res.status(400).send({
         message: `Невалидные данные при создании пользователя`,
       })
+      return;
     } else {
       res.status(500).send({
         message: `Произошла ошибка. Подробнее: ${err.message}`,
       })
+      return;
     }
   })
 }
@@ -82,14 +84,17 @@ module.exports.updateUser = (req, res) => {
       res.status(400).send({
         message: `Невалидные данные при обновлении пользователя`,
       })
+      return;
     } else if(err.name === 'CastError') {
       res.status(404).send({
         message: `Пользователь с таким ID не найден`,
       })
+      return;
     } else {
       res.status(500).send({
         message: `Произошла ошибка. Подробнее: ${err.message}`,
       })
+      return;
     }
   })
 }
@@ -110,14 +115,17 @@ module.exports.updateUserAvatar = (req, res) => {
       res.status(400).send({
         message: `Невалидные данные при обновлении аватара пользователя`,
       })
+      return;
     } else if (err.name === 'CastError') {
       res.status(404).send({
         message: `Пользователь с таким ID не найден`,
       })
+      return;
     } else {
       res.status(500).send({
         message: `Произошла ошибка. Подробнее: ${err.message}`,
       })
+      return;
     }
   })
 

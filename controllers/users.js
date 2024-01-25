@@ -5,6 +5,7 @@ const User = require('../models/user');
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
+const UnauthorizedError = require('../errors/UnauthorizedError');
 
 // Все пользователи
 module.exports.getUsersList = (req, res, next) => {
@@ -28,7 +29,7 @@ module.exports.getUserById = (req, res, next) => {
   })
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь c таким ID не найден');
+        throw new BadRequestError('Пользователь c таким ID не найден');
       }
       res.status(200).send({
         data: user,
@@ -120,7 +121,7 @@ module.exports.login = (req, res, next) => {
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь c таким ID не найден');
+        throw new UnauthorizedError('Пользователь c таким ID не найден');
       } else {
         bcrypt.compare(password, user.password)
           .then((matched) => {

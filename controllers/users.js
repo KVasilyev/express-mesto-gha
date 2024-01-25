@@ -51,27 +51,27 @@ module.exports.createUser = (req, res, next) => {
         avatar,
         email,
         password: hash,
-      })
-        .then((user) => {
-          const { _id } = user;
-          res.status(200).send({
-            name,
-            about,
-            avatar,
-            email,
-            _id,
-          });
-        })
-        .catch((err) => {
-          if (err.code === 11000) {
-            next(new ConflictError('Этот e-mail уже зарегистрирован'));
-            return;
-          } if (err.name === 'ValidationError') {
-            next(new BadRequestError('Некорректные данные'));
-            return;
-          }
-          next(err);
-        });
+      });
+    })
+    .then((user) => {
+      const { _id } = user;
+      res.status(200).send({
+        name,
+        about,
+        avatar,
+        email,
+        _id,
+      });
+    })
+    .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictError('Этот e-mail уже зарегистрирован'));
+        return;
+      } if (err.name === 'ValidationError') {
+        next(new BadRequestError('Некорректные данные'));
+        return;
+      }
+      next(err);
     });
 };
 

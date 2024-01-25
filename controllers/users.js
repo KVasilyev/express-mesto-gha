@@ -54,13 +54,12 @@ module.exports.createUser = (req, res, next) => {
       });
     })
     .then((user) => {
-      const { _id } = user;
       res.status(200).send({
-        name,
-        about,
-        avatar,
-        email,
-        _id,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        email: user.email,
+        _id: user._id,
       });
     })
     .catch((err) => {

@@ -3,10 +3,10 @@ const { celebrate, Joi } = require('celebrate');
 
 const {
   getUsersList,
+  currentUser,
   getUserById,
   updateUser,
   updateUserAvatar,
-  currentUser,
 } = require('../controllers/users');
 
 router.get('/', getUsersList);

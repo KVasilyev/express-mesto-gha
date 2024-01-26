@@ -17,9 +17,7 @@ module.exports.getUsersList = (req, res, next) => {
         user,
       });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch((err) => next(err));
 };
 
 // Пользователь по ID
@@ -32,7 +30,7 @@ module.exports.getUserById = (req, res, next) => {
         throw new NotFoundError('Пользователь c таким ID не найден');
       }
       res.status(200).send({
-        data: user,
+        user,
       });
     })
     .catch((err) => next(err));
@@ -153,5 +151,5 @@ module.exports.currentUser = (res, req, next) => {
         user,
       });
     })
-    .catch(next);
+    .catch((err) => next(err));
 };

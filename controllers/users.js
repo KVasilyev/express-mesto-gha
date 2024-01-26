@@ -54,8 +54,8 @@ module.exports.createUser = (req, res, next) => {
           name: user.name,
           about: user.about,
           avatar: user.avatar,
-          email: user.email,
           _id: user._id,
+          email: user.email,
         });
       })
       .catch((err) => {
@@ -115,7 +115,7 @@ module.exports.login = (req, res, next) => {
   User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Пользователь c таким ID не найден');
+        throw new UnauthorizedError('Неправильные почта или пароль');
       } else {
         bcrypt.compare(password, user.password)
           .then((matched) => {
@@ -129,9 +129,7 @@ module.exports.login = (req, res, next) => {
                 token,
               });
             } else {
-              res.status(500).send({
-                message: 'Не верный пароль',
-              });
+              throw new UnauthorizedError('Неправильные почта или пароль');
             }
           });
       }

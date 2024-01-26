@@ -9,9 +9,7 @@ const UnauthorizedError = require('../errors/UnauthorizedError');
 
 // Все пользователи
 module.exports.getUsersList = (req, res, next) => {
-  User.find({}, {
-    _id: 1, name: 1, about: 1, avatar: 1,
-  })
+  User.find({})
     .then((user) => {
       res.send({
         data: user,
@@ -22,9 +20,7 @@ module.exports.getUsersList = (req, res, next) => {
 
 // Пользователь по ID
 module.exports.getUserById = (req, res, next) => {
-  User.findById(req.params.userId, {
-    _id: 1, name: 1, about: 1, avatar: 1,
-  })
+  User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь c таким ID не найден');

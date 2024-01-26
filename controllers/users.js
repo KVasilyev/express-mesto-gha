@@ -14,7 +14,7 @@ module.exports.getUsersList = (req, res, next) => {
   })
     .then((user) => {
       res.status(200).send({
-        data: user,
+        user,
       });
     })
     .catch((err) => {
@@ -79,7 +79,7 @@ module.exports.updateUser = (req, res, next) => {
     .orFail()
     .then((user) => {
       res.status(200).send({
-        data: user,
+        user,
       });
     })
     .catch((err) => {
@@ -99,7 +99,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
     .orFail()
     .then((user) => {
       res.status(200).send({
-        data: user,
+        user,
       });
     })
     .catch((err) => {

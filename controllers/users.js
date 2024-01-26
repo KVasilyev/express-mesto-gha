@@ -146,5 +146,5 @@ module.exports.currentUser = (res, req, next) => {
         user,
       });
     })
-    .catch((err) => next(err));
+    .catch(next);
 };

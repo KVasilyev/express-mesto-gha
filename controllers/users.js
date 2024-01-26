@@ -29,7 +29,7 @@ module.exports.getUserById = (req, res, next) => {
   })
     .then((user) => {
       if (!user) {
-        throw new BadRequestError('Пользователь c таким ID не найден');
+        throw new NotFoundError('Пользователь c таким ID не найден');
       }
       res.status(200).send({
         data: user,
@@ -144,7 +144,7 @@ module.exports.login = (req, res, next) => {
 // Текущий пользователь
 module.exports.currentUser = (res, req, next) => {
   const id = req.user._id;
-  User.findById(id).select('-password')
+  User.findById(id)
     .then((user) => {
       if (!user) {
         throw new NotFoundError('Пользователь не найден');

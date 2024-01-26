@@ -44,34 +44,31 @@ module.exports.createUser = (req, res, next) => {
     name, about, avatar, email, password,
   } = req.body;
   bcrypt.hash(password, 10)
-    .then((hash) => {
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      });
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
     })
-    .then((user) => {
-      res.status(200).send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        _id: user._id,
-      });
-    })
-    .catch((err) => {
-      if (err.code === 11000) {
-        next(new ConflictError('Этот e-mail уже зарегистрирован'));
-        return;
-      } if (err.name === 'ValidationError') {
-        next(new BadRequestError('Некорректные данные'));
-        return;
-      }
-      next(err);
-    });
+      .then((user) => {
+        res.status(200).send({
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+          _id: user._id,
+        });
+      })
+      .catch((err) => {
+        if (err.code === 11000) {
+          next(new ConflictError('Этот e-mail уже зарегистрирован'));
+        } else if (err.name === 'ValidationError') {
+          next(new BadRequestError('Некорректные данные'));
+          return;
+        }
+        next(err);
+      }));
 };
 
 // Обновление профиля
@@ -127,7 +124,7 @@ module.exports.login = (req, res, next) => {
             if (matched) {
               const token = jwt.sign(
                 { _id: user._id },
-                '830e7e9b-8a50-467a', // Ключ
+                'some-secret-key', // Ключ
                 { expiresIn: '7d' },
               );
               res.status(200).send({

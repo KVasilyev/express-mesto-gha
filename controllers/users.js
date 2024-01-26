@@ -13,7 +13,7 @@ module.exports.getUsersList = (req, res, next) => {
     _id: 1, name: 1, about: 1, avatar: 1,
   })
     .then((user) => {
-      res.status(200).send({
+      res.send({
         data: user,
       });
     })
@@ -125,7 +125,7 @@ module.exports.login = (req, res, next) => {
                 'some-secret-key', // Ключ
                 { expiresIn: '7d' },
               );
-              res.status(200).send({
+              res.send({
                 token,
               });
             } else {

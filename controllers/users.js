@@ -14,11 +14,7 @@ module.exports.getUsersList = (req, res, next) => {
   })
     .then((user) => {
       res.status(200).send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-        email: user.email,
+        data: user,
       });
     })
     .catch((err) => next(err));
@@ -33,9 +29,7 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь c таким ID не найден');
       }
-      res.status(200).send({
-        user,
-      });
+      res.send(user);
     })
     .catch((err) => next(err));
 };
@@ -80,7 +74,7 @@ module.exports.updateUser = (req, res, next) => {
   User.findByIdAndUpdate(owner, { name, about }, { new: true, runValidators: true })
     .orFail()
     .then((user) => {
-      res.status(200).send({
+      res.send({
         name: user.name,
         about: user.about,
         avatar: user.avatar,
@@ -104,13 +98,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
   User.findByIdAndUpdate(owner, { avatar }, { new: true, runValidators: true, select: { avatar } })
     .orFail()
     .then((user) => {
-      res.status(200).send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        _id: user._id,
-        email: user.email,
-      });
+      res.send(user);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

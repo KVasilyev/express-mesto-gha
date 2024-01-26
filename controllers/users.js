@@ -138,7 +138,7 @@ module.exports.login = (req, res, next) => {
 };
 
 // Текущий пользователь
-module.exports.currentUser = (res, req, next) => {
+module.exports.currentUser = (req, res, next) => {
   const id = req.user._id;
   User.findById(id)
     .then((user) => {

@@ -14,7 +14,11 @@ module.exports.getUsersList = (req, res, next) => {
   })
     .then((user) => {
       res.status(200).send({
-        user,
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        _id: user._id,
+        email: user.email,
       });
     })
     .catch((err) => next(err));

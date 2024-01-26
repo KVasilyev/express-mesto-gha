@@ -142,9 +142,6 @@ module.exports.currentUser = (res, req, next) => {
   const id = req.user._id;
   User.findById(id)
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь не найден');
-      }
       res.status(200).send({
         user,
       });

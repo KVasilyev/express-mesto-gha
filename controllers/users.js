@@ -150,12 +150,8 @@ module.exports.currentUser = (res, req, next) => {
         throw new NotFoundError('Пользователь не найден');
       }
       res.status(200).send({
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        _id: user._id,
+        user,
       });
     })
-    .catch((err) => next(err));
+    .catch(next);
 };
